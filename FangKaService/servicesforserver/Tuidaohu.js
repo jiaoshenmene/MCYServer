@@ -94,6 +94,7 @@ module.exports = function () {
                     User.setNickName(baseInfo.id,baseInfo.nickname);
                     User.setHeadUrl(baseInfo.id,baseInfo.headimgurl);
                 }
+
                 table = Handler.tables.getNotCreate(tableId);
                 var freePos = table.room.getFreePos();
                 console.log("playerId: %s, freePos : %s",playerId,freePos);
@@ -101,6 +102,7 @@ module.exports = function () {
                     cb({ok:true,suc:false,codes:Codes.Game_Table_Full});
                     return;
                 }else{//可以入座
+
                     Handler.inPos(playerId,tableId,freePos);
                     User.setPlayerGameInstance(playerId,table);
                     cb({ok:true,suc:true});

@@ -71,13 +71,13 @@ proto.connectToGameServerAndAuth = function (gameUrl) {
 }
 
 
-var rob1 = new Robs(2,2,function () {
+var rob1 = new Robs(3,3,function () {
     rob1.createRoom(function (roomId) {
         var rob2 = new Robs(10,10,function () {
             rob2.joinRoom(roomId);
         });
 
-        var rob3 = new Robs(3,3,function () {
+        var rob3 = new Robs(20,20,function () {
             rob3.joinRoom(roomId);
         });
 
