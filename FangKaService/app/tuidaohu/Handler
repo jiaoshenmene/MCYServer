@@ -1,0 +1,45 @@
+
+var Table = require("./Table");
+var Map = require("./../../core/Map");
+var UnitTools = require("./../../core/UnitTools");
+var User = require("./User");
+var Message = require("./Message");
+class Handler {
+
+    constructor(){
+        this.tables = new Map();
+    }
+
+    createTable(playerId,tableId,custom){
+        var table = new Table(playerId,tableId,custom);
+        this.tables.setKeyValue(tableId,table);
+    }
+    inPos(playerId,tableId,pos){
+        var self = this;
+        var table = this.tables.getNotCreate(tableId);
+        console.log("tableId : " + tableId);
+        table.inPos(playerId,pos);
+
+        User.setTableId(playerId,tableId);
+        User.setPlayerGameInstance(playerId,table);
+        User.setPos(playerId,pos);
+
+        //发送给桌子里其他玩家，有新玩家进入
+        var inPosPIds = table.room.getRoomInPosAccounts();
+        var headInfo = table.getHead(pos);
+        UnitTools.forEach(inPosPIds,function (idx,pId) {
+            if (pId == playerId)return;
+            User.send(pId,Message.inPos,headInfo);
+        })
+    }
+
+    sendEvent(playerIds,eventName,data){
+        UnitTools.forEach(playerIds,function (index,pId) {
+            User.send(pId,eventName,data);
+
+        })
+    }
+
+}
+Handler.g = new Handler();
+module.exports = Handler.g;

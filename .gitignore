@@ -1,0 +1,15 @@
+
+mongodb/*
+
+
+mongodb-osx-x86_64-3.4.1.tgz
+FangKaService/data/*
+FangKaService/__MACOSX/*
+FangKaService/Leak/*
+FangKaService/web/Leak/*
+FangKaService/logs/*
+
+FangKaService/node_modules
+FangKaService/node_modules/*
+
+.idea/*
