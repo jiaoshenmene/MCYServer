@@ -81,6 +81,9 @@ var rob1 = new Robs(3,3,function () {
             rob3.joinRoom(roomId);
         });
 
+        var rob4 = new Robs(2,2,function () {
+            rob4.joinRoom(roomId);
+        });
     })
 });
 

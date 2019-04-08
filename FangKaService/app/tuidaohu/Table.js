@@ -6,11 +6,12 @@ var User = require("./User");
 
 class Table {
     constructor(playerId,tableId,custom){
+        this.posCount = 4;
         this.createId = playerId;
         this.tableId = tableId;
         this.custom = custom;
         this.room = new Room(tableId,4,null);
-        this.logic = new Logic();
+        this.logic = new Logic(this);
     }
 
     getHead(pos){
@@ -39,6 +40,16 @@ class Table {
     inPos(playerId,pos){//  进入座位
         var ok = this.room.inPos(playerId,pos);
         return ok;
+    }
+
+    eachPos(cb){
+        for (var pos = 0;pos<this.posCount;pos++){
+            cb(pos);
+        }
+    }
+
+    update(){
+        this.logic.update();
     }
 
 }

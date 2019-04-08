@@ -8,6 +8,7 @@ class Handler {
 
     constructor(){
         this.tables = new Map();
+        this.intVal = setInterval(this.update.bind(this),10);
     }
 
     createTable(playerId,tableId,custom){
@@ -30,6 +31,12 @@ class Handler {
         UnitTools.forEach(inPosPIds,function (idx,pId) {
             if (pId == playerId)return;
             User.send(pId,Message.inPos,headInfo);
+        })
+    }
+
+    update(){
+        this.tables.forEach(function (tabId,table) {
+            table.update();
         })
     }
 
