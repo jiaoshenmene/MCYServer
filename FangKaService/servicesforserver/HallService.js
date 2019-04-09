@@ -22,7 +22,6 @@ var safeCode = Config.getServerConfig()["safeCode"];
 module.exports = function () {
     // ------------------管理-----------------
     var playerManager = new PlayerManager();
-    var idWithGmUrl = new Map();
 
     console.log("hallService init")
 
@@ -116,18 +115,23 @@ module.exports = function () {
             return ;
         }
 
+        var gameService = app.getRandomService("Tuidaohu");
+        var gameUrl = "ws://"+gameService.ip+":"+gameService.port;
+
         var idService = app.getServiceWithServerID("IdService1");
-        var newId = await idService.runProxy.getTableId(safeCode);
+        var newId = await idService.runProxy.getTableId(gameUrl,safeCode);
+
         console.log("newid: ",newId.tableId);
         if (!newId.ok) {
             cb({ok:true,suc:false,info:"创建失败，请重试"});
             return ;
         }
 
-        var gameService = app.getRandomService("Tuidaohu");
-        var gameUrl = "ws://"+gameService.ip+":"+gameService.port;
+
         console.log("tableId gameUrl : %s %s",newId.tableId,gameUrl);
-        idWithGmUrl.setKeyValue(newId.tableId,gameUrl);
+
+
+
         playerManager.setGameUrl(playerId,gameUrl);
 
         // 创建房间
@@ -149,20 +153,20 @@ module.exports = function () {
             cb({ok:true,suc:true,gameUrl:gameUrl});
             return ;
         }
+        var idService = app.getServiceWithServerID("IdService1");
+        var urlInfo = await idService.runProxy.getTabGameUrl(tableId,safeCode);
 
-        gameUrl = idWithGmUrl.getNotCreate(tableId);
-        console.log("playerId %s , gameurl : %s %o",playerId,gameUrl,idWithGmUrl);
-        if (!gameUrl){
+        if (!urlInfo.gameUrl){
             cb({ok:true,suc:false,codes:Codes.Game_Not_Exsit});
             return ;
         }
 
         //调用服务器加入桌子
-        var gameService = app.getServiceWithServerPort(gameUrl);
+        var gameService = app.getServiceWithServerPort(urlInfo.gameUrl);
         var res = await gameService.runProxy.joinTable(tableId,playerId,safeCode);
 
         if (res.ok && res.suc){
-            cb({ok:true,suc:true,gameUrl:gameUrl});
+            cb({ok:true,suc:true,gameUrl:urlInfo.gameUrl});
             return ;
         }
         cb(res);
