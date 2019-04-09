@@ -37,6 +37,10 @@ class Table {
         return info;
     }
 
+    getPidWithPos(pos){ //进入座位
+        return this.room.getInPosInfo()[pos].account;
+    }
+
     inPos(playerId,pos){//  进入座位
         var ok = this.room.inPos(playerId,pos);
         return ok;

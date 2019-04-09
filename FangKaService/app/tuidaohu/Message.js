@@ -1,3 +1,4 @@
 module.exports = {
-    inPos:"inPos"
+    inPos:"inPos",
+    startCards:"startCards"//开局牌
 }

@@ -56,7 +56,8 @@ module.exports = function () {
         }
         var heads = table.getHeads();
         console.log("heads:%o",heads);
-        var frames = {};
+        var frames = table.logic.getRestoreFrames(playerId);
+        console.log("frames : %o",frames);
         cb({ok:true,suc:true,info:infos,isInGame:true,inRoomInfo:{playerId:playerId,pos:User.getPos(playerId),heads:heads,frames:frames}});
 
     }
