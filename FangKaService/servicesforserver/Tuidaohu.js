@@ -114,6 +114,41 @@ module.exports = function () {
         }
     }
 
+    service.hitCard = function (data,cb) {
+        //判断打牌的合法性
+        var playerId = cb.session.playerId;
+        if (!User.getIsLogin(playerId)){
+            cb({ok:true,suc:false,codes:Codes.Player_Not_Login});
+            return;
+        }
+
+        var cardIndex = data.cardIndex;
+        var actionId = data.actionId;
+        var table = User.getPlayerGameInstance(playerId);
+        if (!table){
+            cb({ok:true,suc:false,codes:Codes.Player_Not_Login});
+            return;
+        }
+
+        if (actionId != table.actionId()){
+            cb({ok:true,suc:false,codes:Codes.Game_Action_Not_Valid});
+            return;
+        }
+        var pos = User.getPos(playerId);
+        if (pos != table.hitPos()){
+            cb({ok:true,suc:false,codes:Codes.Game_Action_Not_Valid});
+            return;
+        }
+        if (!table.hasCard(pos,cardIndex)){
+            cb({ok:true,suc:false,codes:Codes.Game_Action_Not_Valid});
+            return;
+        }
+        //合法:
+        table.logic.action.setRespond(pos,cardIndex);
+        cb({ok:true,suc:true});
+
+    }
+
     return{
         service:service,onClientIn:onClientIn,onClientOut:onClientOut,onStart:onStart
 

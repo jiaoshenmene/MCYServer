@@ -37,6 +37,26 @@ class Table {
         return info;
     }
 
+    getNextPos(pos){
+        var nextPos = new Number(pos) + 1;
+        nextPos = nextPos > this.posCount - 1 ? 0 : nextPos;
+        return nextPos;
+    }
+
+    //获得之前的位置
+    getPrePos(pos) {
+        var prePos = new Number(pos) - 1;
+        prePos = prePos < 0 ? this.posCount - 1 : prePos;
+        return prePos;
+    }
+
+    //获得对家的位置
+    getTeamPos(pos) {
+        var teamPos = new Number(pos) + 2;
+        teamPos = teamPos > this.posCount - 1 ? teamPos - this.posCount : teamPos;
+        return teamPos;
+    }
+
     getPidWithPos(pos){ //进入座位
         return this.room.getInPosInfo()[pos].account;
     }
@@ -50,6 +70,18 @@ class Table {
         for (var pos = 0;pos<this.posCount;pos++){
             cb(pos);
         }
+    }
+
+    actionId(){
+        return this.logic.action.actionId;
+    }
+
+    hitPos(){
+        return this.logic.toHitPos;
+    }
+
+    hasCard(pos,cardIndex){
+        return !UnitTools.isNullOrUndefined(this.logic.rawHandCards[pos][cardIndex]);
     }
 
     update(){

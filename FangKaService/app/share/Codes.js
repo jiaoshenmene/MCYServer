@@ -15,5 +15,9 @@ module.exports = {
     Game_Table_Full:{
         code:2002,
         info:"座位已满"
+    },
+    Game_Action_Not_Valid:{
+        code:2003,
+        info:"操作无效 "
     }
 };

@@ -5,6 +5,39 @@ var UnitTools = require("./../../core/UnitTools.js");
 var Message = require("./../tuidaohu/Message");
 var User = require("./User");
 
+class Action {
+    constructor(actionId){
+        this.actionTime = Date.now();
+        this.actionId = actionId;
+        this.actionData = null;
+        this.responds = {};
+
+    }
+
+    setRespond(pos,data){
+        this.responds[pos] = data;
+    }
+
+    getRespond(pos){//得到回复消息
+        return this.responds[pos];
+    }
+
+    isRespond(pos){//是否回复
+        return !UnitTools.isNullOrUndefined(this.responds[pos]);
+    }
+
+    setActionData(actionData){
+        this.actionData = actionData;
+    }
+
+    getActionData(){
+        return this.actionData;
+    }
+
+
+
+}
+
 class Logic {
     constructor(tab){
         this.tab = tab;
@@ -12,13 +45,23 @@ class Logic {
         this.handCards = new Array(this.tab.posCount); //牌形数量数组
         this.rawHandCards = new Array(this.tab.posCount); //手里原始牌数字
         for (var pos = 0;pos<this.tab.posCount;pos++) {
-            var a = this.handCards[pos] = new Array(34);
+            var a = this.handCards[pos] = new Array(35);
             a.fill(0);
-            a = this.rawHandCards[pos] = new Array(14);
-            a.fill(0);
+            a = this.rawHandCards[pos] = {};
         }
 
+        this.mainPos = null; //庄pos
+        this.touchIndex = 0;
+        this.touchPos = null;//当前摸牌位置
+        this.toHitPos = null;//当前轮到谁打牌的位置
+        this.actionId = 0;
+        this.action = null; //当前action
+
+
+
+
         this.frames = []; // 历史消息
+        
 
         this.staM = new StaM();
         this.staM.registerState(1,this.waitingP.bind(this));//1表示等待
@@ -69,6 +112,41 @@ class Logic {
         return frames;
     }
 
+    manageCard(pos,cardIndex){
+        this.rawHandCards[pos][cardIndex] = cardIndex;
+        var tIndex = Majiang.tIndex(cardIndex);
+        this.handCards[pos][tIndex] += 1;
+
+    }
+
+    unManageCard(pos,cardIndex){
+        delete this.rawHandCards[pos][cardIndex];
+        var tIndex = Majiang.tIndex(cardIndex);
+        this.handCards[pos][tIndex]-=1;
+    }
+
+    touchCard(pos) { //摸一张牌
+        this.touchPos = pos;
+        var touchCardIndex = this.washCards[this.touchIndex];
+        if (UnitTools.isNullOrUndefined(touchCardIndex)){ //进入流局
+            this.staM.changeToState("liuju");
+            console.log("流局了");
+            return;
+        }
+        this.handCards[pos][34] = touchCardIndex;
+        var pId = this.tab.getPidWithPos(pos);
+        this.sendGroupAndSave([pId],Message.touchCard,{pos:pos,cardIndex_s:touchCardIndex});
+    }
+
+
+    toHitCard(pos) { //轮到谁打牌
+        this.toHitPos = pos;
+        this.action = new Action(++this.actionId);
+        this.sendGroupAndSave([],Message.toHitCard,{pos:this.toHitPos,actionId:this.action.actionId});
+        this.staM.changeToState(3);//等待打牌
+
+    }
+
     waitingP(){
         if (this.tab.room.getFreePos() == null){
             console.log("满人了，游戏开始");
@@ -77,36 +155,43 @@ class Logic {
     }
 
     washP(){
-        console.log("进入洗牌阶段");
-
+        console.log("进入洗牌阶段!");
         this.washCards = Majiang.cards.concat();
         UnitTools.washArray(this.washCards);
-        console.log("洗完后的牌：%o",this.washCards);
-        for (var i = 0;i<54;i+=16){
+        //console.log("洗完后的牌:%o",this.washCards);
+        for(var i = 0;i<54;i+=16){
             this.tab.eachPos(function (pos) {
                 var startIndex = i+pos*4;
-                var handStartIndex = i / 4;
-                for (var j = 0;j<4;j++){
-                    var cardIndex = this.rawHandCards[pos][handStartIndex+j] = this.washCards[startIndex+j];
-                    var tIndex = Majiang.tIndex(cardIndex);
-                    this.handCards[pos][tIndex]+=1;
+                var handStartIndex = i/4;
+                for(var j = 0;j<4;j++){//次数
+                    var cardIndex = this.washCards[startIndex+j];
+                    this.manageCard(pos,cardIndex);
                 }
 
             }.bind(this));
         }
         // console.log("发到手里的牌%o",this.rawHandCards);
-        // console.log("牌型：%o",this.handCards);
+        // console.log("牌型:%o",this.handCards);
         this.tab.eachPos(function (pos) {
             var pId = this.tab.getPidWithPos(pos);
-            var cards13 = this.rawHandCards[pos].slice(0,13);
-            console.log("sdfdsf");
-            console.log(cards13);
+            var cards13 = Object.keys(this.rawHandCards[pos]);// .slice(0,13);
             this.sendSpecialAndSave(pId,Message.startCards,{cardIndexs:cards13});
         }.bind(this))
-        this.staM.changeToState(3);
 
+        this.touchIndex = 54;
+        this.mainPos = 3;//逻辑位置是2，对应客户端自己第一个打牌
+        this.touchCard(this.mainPos);
+        this.toHitCard(this.mainPos);
     }
     hitP(){
+        if (!this.action.isRespond(this.toHitPos)) return;
+        var cardIndex = this.action.getRespond(this.toHitPos);
+        //移除手里的牌
+        this.unManageCard(this.toHitPos,cardIndex);
+        this.sendGroupAndSave([],Message.hitCard,{pos: this.toHitPos,cardIndex:cardIndex});
+        var nextPos = this.tab.getNextPos(this.toHitPos);
+        this.touchCard(nextPos);
+        this.toHitCard(nextPos);
 
     }
     update(){
