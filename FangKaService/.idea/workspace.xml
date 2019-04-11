@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a8babb8d-c032-4d6f-b8ad-1d7f98f7a31c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/share/Codes.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/share/Codes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/tuidaohu/Logic.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/tuidaohu/Logic.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/tuidaohu/Message.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/tuidaohu/Message.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tuidaohu/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/tuidaohu/Table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tuidaohu/Robs.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/tuidaohu/Robs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/.bin/mime" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/mime" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/.bin/msgpack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/msgpack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/servicesforserver/Tuidaohu.js" beforeDir="false" afterPath="$PROJECT_DIR$/servicesforserver/Tuidaohu.js" afterDir="false" />
@@ -20,13 +19,85 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="FangKaService" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/tuidaohu/Handler">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="833">
+              <caret line="43" column="16" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/servicesforserver/Tuidaohu.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="522">
+              <caret line="159" column="45" lean-forward="true" selection-start-line="159" selection-start-column="45" selection-end-line="159" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/share/Codes.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="263">
+              <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/tuidaohu/Logic.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="9" column="37" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
+            <state relative-caret-position="465">
+              <caret line="162" column="12" selection-start-line="162" selection-start-column="8" selection-end-line="162" selection-end-column="12" />
+              <folding>
+                <element signature="e#12517#12521#0" />
+                <element signature="e#13637#13642#0" />
+                <element signature="e#14774#14780#0" />
+                <element signature="e#15862#15868#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/StateManger.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="37" column="8" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/tuidaohu/Table.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="78" column="4" selection-start-line="78" selection-start-column="4" selection-end-line="78" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/tuidaohu/Message.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/tuidaohu/Robs.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="178">
+              <caret line="63" column="35" lean-forward="true" selection-start-line="63" selection-start-column="29" selection-end-line="63" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -42,17 +113,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mmap-kit</find>
-      <find>UnitTools.getFuncArgs</find>
-      <find>ids</find>
-      <find>isNullOrUndefined</find>
-      <find>setPos</find>
-      <find>posInfo</find>
-      <find>setHeadUrl</find>
-      <find>创建</find>
-      <find>free</find>
-      <find>playerId</find>
-      <find>Game_Not_Exsit</find>
       <find>hallService init</find>
       <find>cards13</find>
       <find>frames</find>
@@ -66,6 +126,23 @@
       <find>manageCard</find>
       <find>adjustSelfHandCard</find>
       <find>进入洗牌阶段!</find>
+      <find>gameC</find>
+      <find>handActions</find>
+      <find>touch</find>
+      <find>toWaitAction</find>
+      <find>touchAn</find>
+      <find>hitP</find>
+      <find>waiting</find>
+      <find>getActionWithCard</find>
+      <find>toWai</find>
+      <find>wait</find>
+      <find>2000</find>
+      <find>hitTimeOut</find>
+      <find>toHitCard</find>
+      <find>touchAndDealHandAction</find>
+      <find>washP</find>
+      <find>robHitCard</find>
+      <find>tohit</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -100,11 +177,11 @@
         <option value="$PROJECT_DIR$/app/share/Chess.js" />
         <option value="$PROJECT_DIR$/servicesforserver/HallService.js" />
         <option value="$PROJECT_DIR$/servicesforserver/IdService.js" />
-        <option value="$PROJECT_DIR$/app/tuidaohu/Message.js" />
         <option value="$PROJECT_DIR$/app/share/Codes.js" />
-        <option value="$PROJECT_DIR$/servicesforserver/Tuidaohu.js" />
-        <option value="$PROJECT_DIR$/app/tuidaohu/Table.js" />
         <option value="$PROJECT_DIR$/app/tuidaohu/Robs.js" />
+        <option value="$PROJECT_DIR$/app/tuidaohu/Message.js" />
+        <option value="$PROJECT_DIR$/app/tuidaohu/Table.js" />
+        <option value="$PROJECT_DIR$/servicesforserver/Tuidaohu.js" />
         <option value="$PROJECT_DIR$/app/tuidaohu/Logic.js" />
       </list>
     </option>
@@ -119,9 +196,10 @@
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="429" />
+    <option name="x" value="4" />
+    <option name="y" value="95" />
     <option name="width" value="1436" />
-    <option name="height" value="402" />
+    <option name="height" value="798" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -279,12 +357,13 @@
       <workItem from="1554682506939" duration="24614000" />
       <workItem from="1554772871894" duration="3946000" />
       <workItem from="1554778517408" duration="14994000" />
-      <workItem from="1554860474271" duration="9560000" />
+      <workItem from="1554860474271" duration="22978000" />
+      <workItem from="1554968710464" duration="3039000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="121723000" />
+    <option name="totallyTimeSpent" value="138180000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -296,20 +375,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="429" width="1436" height="402" extended-state="0" />
+    <frame x="4" y="95" width="1436" height="798" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26289752" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4985507" visible="true" weight="0.26289752" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info id="Favorites" order="2" sideWeight="0.5014493" side_tool="true" weight="0.26289752" />
       <window_info id="npm" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32743362" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49893993" weight="0.5171674" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49893993" visible="true" weight="0.28470254" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39941263" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49964663" weight="0.328" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49964663" weight="0.32791728" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49964663" weight="0.32535884" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49964663" weight="0.42479676" />
@@ -554,11 +633,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/StateManger.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-371" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/share/Chess.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -577,20 +651,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
           <caret line="24" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/servicesforserver/Tuidaohu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="143" column="16" selection-start-line="143" selection-start-column="16" selection-end-line="143" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/tuidaohu/Handler">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -615,38 +675,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/tuidaohu/Table.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="68" column="4" selection-start-line="68" selection-start-column="4" selection-end-line="68" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/tuidaohu/Message.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+        <state relative-caret-position="200">
+          <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/tuidaohu/Robs.js">
+    <entry file="file://$PROJECT_DIR$/core/StateManger.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="85" column="14" lean-forward="true" selection-start-line="83" selection-start-column="7" selection-end-line="85" selection-end-column="14" />
+        <state relative-caret-position="45">
+          <caret line="37" column="8" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/share/Codes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="20" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="20" />
+        <state relative-caret-position="263">
+          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tuidaohu/Robs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="63" column="35" lean-forward="true" selection-start-line="63" selection-start-column="29" selection-end-line="63" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tuidaohu/Table.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="78" column="4" selection-start-line="78" selection-start-column="4" selection-end-line="78" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tuidaohu/Handler">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="43" column="16" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/servicesforserver/Tuidaohu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="159" column="45" lean-forward="true" selection-start-line="159" selection-start-column="45" selection-end-line="159" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/tuidaohu/Logic.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="9" column="37" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
+        <state relative-caret-position="465">
+          <caret line="162" column="12" selection-start-line="162" selection-start-column="8" selection-end-line="162" selection-end-column="12" />
+          <folding>
+            <element signature="e#12517#12521#0" />
+            <element signature="e#13637#13642#0" />
+            <element signature="e#14774#14780#0" />
+            <element signature="e#15862#15868#0" />
+          </folding>
         </state>
       </provider>
     </entry>

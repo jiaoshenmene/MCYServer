@@ -56,8 +56,21 @@ proto.joinRoom = function (roomId) {
 }
 
 proto.connectToGameServerAndAuth = function (gameUrl) {
+
+    var gameClient = this.gameClient = new Client();
+    var service = {};
+    service.toHitCard = function (data,cb) {
+        setTimeout(function () {
+            gameClient.proxy.robHitCard({},function () {
+
+            })
+
+        },2000)
+
+    }
+
     var self = this;
-    this.gameClient = new Client();
+    this.gameClient.addRpc(service);
     this.gameClient.connect(gameUrl);
     this.gameClient.onReady(function (client) {
         client.proxy.login(self.account,self.pass,function (data) {

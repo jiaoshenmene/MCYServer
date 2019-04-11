@@ -149,6 +149,20 @@ module.exports = function () {
 
     }
 
+    service.robHitCard = function (data,cb) {
+        var playerId = cb.session.playerId;
+        var pos = User.getPos(playerId);
+        var table = User.getPlayerGameInstance(playerId);
+        if (pos != table.hitPos()){
+            cb({ok:true,suc:false,codes:Codes.Game_Action_Not_Valid});
+            return;
+        }
+        var cardIndex = table.logic.getRandomHitCard(pos);
+            //合法:
+        table.logic.action.setRespond(pos,cardIndex);
+        cb({ok:true,suc:true});
+    }
+
     return{
         service:service,onClientIn:onClientIn,onClientOut:onClientOut,onStart:onStart
 
