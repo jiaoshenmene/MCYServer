@@ -66,7 +66,6 @@ Room.prototype.inRoom = function (account) {//进入房间
 
 Room.prototype.inPos = function (account, pos) {//进入座位
     //判断玩家是不是在座位上，如果在，则移除之前的位置，进入新位置
-    console.log("inPos : "+pos);
     if (!this.isPosValid(pos))return false;
     this.inRoom(account);//如果直接调用inPos，那么需要把账号进入房间
     if (!this.isPosEmpty(pos))return false;

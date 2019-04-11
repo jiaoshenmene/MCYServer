@@ -1,4 +1,6 @@
-
+/**
+ * Created by litengfei on 2018/3/8.
+ */
 var Majiang = {};
 Majiang.cards = [
     11,12,13,14,15,16,17,18,19,//万
@@ -24,14 +26,12 @@ Majiang.cards = [
 
 Majiang.card = function (cdIdx) {
     var sCdIdx = this.smCard(cdIdx);
-    var ca = new Array(2);
-    ca[0] = parseInt(sCdIdx/10);
-    ca[1] = sCdIdx%10;
+    var ca = new Array(2);ca[0] = parseInt(sCdIdx/10); ca[1] = sCdIdx%10;
     return ca;
 }
 
-Majiang.smCard = function (cdIdx) { //在一副牌里面的牌
-    if (cdIdx>=60) return this.smCard(cdIdx - 50);
+Majiang.smCard = function (cdIdx) {//在一副牌里面的牌
+    if(cdIdx>=60)return this.smCard(cdIdx - 50);
     return cdIdx;
 }
 
@@ -40,4 +40,9 @@ Majiang.tIndex = function (cardIndex) {//在34张牌里的索引
     return (card[0]-1)*9+(card[1]-1);
 }
 
-module.exports = {Majiang:Majiang};
+
+
+
+module.exports = {Majiang:Majiang}
+
+// console.log(Majiang.tIndex(19));

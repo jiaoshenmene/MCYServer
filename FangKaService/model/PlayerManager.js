@@ -14,8 +14,7 @@ class PlayerManager{
      * @return 返回玩家的基础信息
      */
     getOrCreatePlayer(playerID){
-        return this.playerInfos.getOrCreate(playerID)
-
+        return this.playerInfos.getOrCreate(playerID);
     }
 
     /**
@@ -65,20 +64,21 @@ class PlayerManager{
         return info.headUrl;
     }
 
+    //保存session
     setSession(playerId,session){
         var info = this.getOrCreatePlayer(playerId);
         info.session = session;
     }
 
+    //获得session
     getSession(playerId){
-        return this.getOrCreatePlayer(playerId).session
+        return this.getOrCreatePlayer(playerId).session;
     }
 
     setGameUrl(playerId,gameUrl){
         var info = this.getOrCreatePlayer(playerId);
         info.gameUrl = gameUrl;
     }
-
     getGameUrl(playerId){
         return this.getOrCreatePlayer(playerId).gameUrl;
     }
@@ -87,7 +87,6 @@ class PlayerManager{
         var info = this.getOrCreatePlayer(playerId);
         info.tableId = tableId;
     }
-
     getTableId(playerId){
         return this.getOrCreatePlayer(playerId).tableId;
     }
@@ -100,7 +99,7 @@ class PlayerManager{
         return this.getOrCreatePlayer(playerId).pos;
     }
 
-    // 是否有该玩家
+    //是否有该玩家
     hasPlayer(playerId){
         return this.playerInfos.hasKey(playerId);
     }

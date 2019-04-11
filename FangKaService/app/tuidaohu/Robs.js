@@ -1,19 +1,21 @@
-
-
-var Client = require("./../../core/WsRpcClient");
-var HallIP = "ws://127.0.0.1:39401";
+/**
+ * Created by litengfei on 2018/3/4.
+ */
+var Client = require("./../../core/WsRpcClient.js");
+var HallIp = "ws://127.0.0.1:39401";
 
 var Robs = function (account,pass,afterLogin) {
     this.account = account;
     this.pass = pass;
     this.playerId = null;
     this.hallClient = new Client();
-    this.hallClient.connect(HallIP);
+    this.hallClient.connect(HallIp);
     this.gameClient = null;
     this.login(afterLogin);
 }
 
 var proto = Robs.prototype;
+
 
 proto.login = function (afterLogin) {
     var self = this;
@@ -56,7 +58,6 @@ proto.joinRoom = function (roomId) {
 }
 
 proto.connectToGameServerAndAuth = function (gameUrl) {
-
     var gameClient = this.gameClient = new Client();
     var service = {};
     service.toHitCard = function (data,cb) {
@@ -64,19 +65,16 @@ proto.connectToGameServerAndAuth = function (gameUrl) {
             gameClient.proxy.robHitCard({},function () {
 
             })
-
         },2000)
-
     }
-
     var self = this;
+
     this.gameClient.addRpc(service);
     this.gameClient.connect(gameUrl);
     this.gameClient.onReady(function (client) {
         client.proxy.login(self.account,self.pass,function (data) {
             console.log("机器人:%s,登录游戏服务器结果:%o",self.account,data);
             if(data.ok&&data.suc){
-                //
 
             }
         })
@@ -84,21 +82,17 @@ proto.connectToGameServerAndAuth = function (gameUrl) {
 }
 
 
+
 var rob1 = new Robs(3,3,function () {
     rob1.createRoom(function (roomId) {
         var rob2 = new Robs(10,10,function () {
             rob2.joinRoom(roomId);
         });
-
         var rob3 = new Robs(20,20,function () {
             rob3.joinRoom(roomId);
         });
-
-        // var rob4 = new Robs(2,2,function () {
-        //     rob4.joinRoom(roomId);
-        // });
-
-
     })
+
 });
+
 

@@ -197,9 +197,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="4" />
-    <option name="y" value="95" />
+    <option name="y" value="153" />
     <option name="width" value="1436" />
-    <option name="height" value="798" />
+    <option name="height" value="694" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -300,7 +300,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.Robs.js">
+  <component name="RunManager" selected="Node.js.Api.js">
     <configuration name="Api.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/web/Api.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
@@ -318,9 +318,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.Api.js" />
         <item itemvalue="Node.js.Robs.js" />
         <item itemvalue="Node.js.start.js" />
-        <item itemvalue="Node.js.Api.js" />
         <item itemvalue="Node.js.Tuidaohu.js" />
         <item itemvalue="Node.js.IdService.js" />
       </list>

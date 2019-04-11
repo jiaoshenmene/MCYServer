@@ -1,12 +1,14 @@
-
+/**
+ * Created by litengfei on 2018/1/28.
+ */
 module.exports = {
-    player_Not_In_Game:{
+    Player_Not_In_Game:{
         code:1000,
         info:"玩家不在游戏当中"
     },
     Player_Not_Login:{
         code:1001,
-        info:"还没有登陆"
+        info:"还没有登录"
     },
     Game_Not_Exsit:{
         code:2001,

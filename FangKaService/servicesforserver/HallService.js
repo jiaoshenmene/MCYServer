@@ -11,21 +11,19 @@
  */
 var app = require("./../core/app.js").instance;
 var UnitTools = require("./../core/UnitTools.js");
-var PlayerManager = require("./../model/PlayerManager");
-var DataBaseManager = require("./../Theme/FangkaMajiang/db/DataBaseManager");
-var Config = require("./../core/Config");
-var Codes = require("./../app/share/Codes");
-var Map = require("./../core/Map");
+var PlayerManager = require("./../model/PlayerManager.js");
+var DataBaseManager = require("./../Theme/FangkaMajiang/db/DataBaseManager.js");
+var Config = require("./../core/Config.js");
+var Codes = require("./../app/share/Codes.js");
+var Map = require("./../core/Map.js");
 DataBaseManager.instance().initDBFromServerConfig();
 var safeCode = Config.getServerConfig()["safeCode"];
-
 module.exports = function () {
-    // ------------------管理-----------------
+
+    //--------------------管理---------------------
     var playerManager = new PlayerManager();
-
-    console.log("hallService init")
-
-    //  --------------- End 管理------------------
+    var idWithGmUrl = new Map();
+    //-------------------END管理---------------
 
     var onStart = function (serverID, serviceType, serverIP, serverPort, custom) {
 
@@ -36,12 +34,15 @@ module.exports = function () {
     }
 
     var onClientOut = function (session) {
-        if (!playerManager.hasPlayer(session.playerId))return;
-        if (session == playerManager.getSession(session.playerId)){//表示可以设置非login状态
-            playerManager.setIsLogin(session.playerId,false);//非登陆状态
+        if(!playerManager.hasPlayer(session.playerId))return;
+        if(session == playerManager.getSession(session.playerId)){//表示可以设置非login状态
+            playerManager.setIsLogin(session.playerId,false);//非登录状态
         }
-
     }
+
+
+
+
 
     var service = {};
 
@@ -81,38 +82,36 @@ module.exports = function () {
         cb.session.playerId = infos.id;
         cb({ok:true,suc:true,info:infos});
     }
-
-
+    
     service.getPlayerBaseInfo = async function (cb) {
         var playerId = cb.session.playerId;
-        var isLogin = playerManager.getIsLogin(playerId);
-        if (!isLogin){
+        var isLogin =  playerManager.getIsLogin(playerId);
+        if(!isLogin){
             cb({ok:false});
-            return ;
+            return;
         }
-        // 获得基本信息
+        //获得基本信息
         var infos = await DataBaseManager.instance().findPlayerWithId(playerId,{id:1,nickname:1,score:1,headimgurl:1});
         console.log(infos);
-        if (infos === null){
+        if(infos === null){
             cb({ok:true,suc:false});
-            return ;
+            return;
         }
         cb({ok:true,suc:true,info:infos});
-
-
     }
-
-    service.createRoom = async function (roomInfo,cb){
+    
+    service.createRoom = async function (roomInfo,cb) {
         var playerId = cb.session.playerId;
-        var isLogin = playerManager.getIsLogin(playerId);
-        if (!isLogin){
+        var isLogin =  playerManager.getIsLogin(playerId);
+        if(!isLogin){
             cb({ok:false});
-            return ;
+            return;
         }
+
         var oldUrl = playerManager.getGameUrl(playerId);
-        if (oldUrl) {
+        if(oldUrl){//不允许创建，返回gameurl，通知客户端连接服务器
             cb({ok:true,suc:true,url:oldUrl});
-            return ;
+            return;
         }
 
         var gameService = app.getRandomService("Tuidaohu");
@@ -120,54 +119,46 @@ module.exports = function () {
 
         var idService = app.getServiceWithServerID("IdService1");
         var newId = await idService.runProxy.getTableId(gameUrl,safeCode);
-
-        console.log("newid: ",newId.tableId);
-        if (!newId.ok) {
+        console.log("HallService->createRoom->newId:%s",newId.tableId);
+        if(!newId.ok){
             cb({ok:true,suc:false,info:"创建失败，请重试"});
-            return ;
+            return;
         }
-
-
-        console.log("tableId gameUrl : %s %s",newId.tableId,gameUrl);
-
-
-
+        // idWithGmUrl.setKeyValue(newId.tableId,gameUrl);
         playerManager.setGameUrl(playerId,gameUrl);
-
-        // 创建房间
+        //创建房间
         await gameService.runProxy.createTable(playerId,newId.tableId,roomInfo,safeCode);
         cb({ok:true,suc:true,url:gameUrl,roomId:newId.tableId});
     }
 
-
-    service.joinTable = async function (tableId,cb) { //加入桌子
+    service.joinTable = async function (tableId,cb) {//加入桌子
         var playerId = cb.session.playerId;
-        console.log("joinTable : "+tableId);
-        if (!playerManager.getIsLogin(playerId)) {
+        if(!playerManager.getIsLogin(playerId)){
             cb({ok:true,suc:false,codes:Codes.Player_Not_Login});
-            return ;
-
+            return;
         }
+
         var gameUrl = playerManager.getGameUrl(playerId);
-        if (gameUrl){
+        if(gameUrl){
             cb({ok:true,suc:true,gameUrl:gameUrl});
-            return ;
+            return;
         }
-        var idService = app.getServiceWithServerID("IdService1");
-        var urlInfo = await idService.runProxy.getTabGameUrl(tableId,safeCode);
 
-        if (!urlInfo.gameUrl){
+        var idService = app.getServiceWithServerID("IdService1");
+        var urlInfo = await idService.runProxy.getTabGameUrl(tableId,safeCode); //idWithGmUrl.getNotCreate(tableId);
+
+        if(!urlInfo.gameUrl){
             cb({ok:true,suc:false,codes:Codes.Game_Not_Exsit});
-            return ;
+            return;
         }
 
         //调用服务器加入桌子
         var gameService = app.getServiceWithServerPort(urlInfo.gameUrl);
         var res = await gameService.runProxy.joinTable(tableId,playerId,safeCode);
-
-        if (res.ok && res.suc){
+        console.log(res);
+        if(res.ok && res.suc){
             cb({ok:true,suc:true,gameUrl:urlInfo.gameUrl});
-            return ;
+            return;
         }
         cb(res);
     }
