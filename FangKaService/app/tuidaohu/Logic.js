@@ -267,6 +267,7 @@ class Logic{
     handleAction(pos,actionType,selectTIndex){
         var action = this.action.getActionData()[pos][actionType];
         if(actionType == Logic.HandAction.Peng){//处理碰
+            console.log("handleAction");
             var cardIndex = Majiang.cards[action.tIndex];
             var selects = this.selectCardIndexs(pos,cardIndex,2);
             for(var idx in selects){
@@ -275,9 +276,9 @@ class Logic{
             this.handActions[pos].push(action);//保存自己的动作
             //通知所有的玩家，有人碰了
             this.sendGroupAndSave([],Message.doAction,{pos:pos,hitPos:action.hitPos,hitIndex:cardIndex,actionType:actionType,cardIndexs:selects});
-            // this.toHitCard(pos);
-            var nextPos = this.tab.getNextPos(action.hitPos);
-            this.touchAndDealHandAction(nextPos);
+            this.toHitCard(pos);
+
+
         }else if(actionType == Logic.HandAction.AnGang){//处理暗杠
             var selectAction = null;
             for(var idx in action){
@@ -381,29 +382,29 @@ class Logic{
         var pos3 = [];
 
         {//碰
-            // this.washCards = [41,42,43,44];
-            // this.touchIndex = 0;
-            // this.mainPos = 2;
-            // pos0 = [11,12,13,14,15,16,17,18,19,45,42,43,44];
-            // pos1 = [61,62,63,64,65,66,67,68,69,95,92,93,94];
-            // pos2 = [111,112,113,114,115,116,117,118,119,145,142,143,144];
-            // pos3 = [161,162,163,164,165,166,167,168,169,91,141,193,194];
-            //
-            // for(var i = 0;i<13;i++){
-            //     this.manageCard(0,pos0[i]);
-            //     this.manageCard(1,pos1[i]);
-            //     this.manageCard(2,pos2[i]);
-            //     this.manageCard(3,pos3[i]);
-            // }
-            // this.tab.eachPos(function (pos) {
-            //     var pId = this.tab.getPidWithPos(pos);
-            //     var cards13 = Object.keys(this.rawHandCards[pos]);
-            //     this.sendSpecialAndSave(pId,Message.startCards,{cardIndexs:cards13});
-            //     if(pos == 3)console.log(cards13);
-            // }.bind(this))
-            //
-            // this.touchCard(this.mainPos);
-            // this.toHitCard(this.mainPos);
+            this.washCards = [41,42,43,44];
+            this.touchIndex = 0;
+            this.mainPos = 2;
+            pos0 = [11,12,13,14,15,16,17,18,19,45,42,43,44];
+            pos1 = [61,62,63,64,65,66,67,68,69,95,92,93,94];
+            pos2 = [111,112,113,114,115,116,117,118,119,145,142,143,144];
+            pos3 = [161,162,163,164,165,166,167,168,169,91,141,193,194];
+
+            for(var i = 0;i<13;i++){
+                this.manageCard(0,pos0[i]);
+                this.manageCard(1,pos1[i]);
+                this.manageCard(2,pos2[i]);
+                this.manageCard(3,pos3[i]);
+            }
+            this.tab.eachPos(function (pos) {
+                var pId = this.tab.getPidWithPos(pos);
+                var cards13 = Object.keys(this.rawHandCards[pos]);
+                this.sendSpecialAndSave(pId,Message.startCards,{cardIndexs:cards13});
+                if(pos == 3)console.log(cards13);
+            }.bind(this))
+
+            this.touchCard(this.mainPos);
+            this.toHitCard(this.mainPos);
         }
 
         {//暗杠
@@ -459,27 +460,27 @@ class Logic{
 
         {//过路杠
             //-------------------0   1  2  3
-            this.washCards = [41,42,43,44,191];
-            this.touchIndex = 0;
-            this.mainPos = 2;
-            pos0 = [11,12,13,14,15,16,17,18,19,45,42,43,44];
-            pos1 = [61,62,63,64,65,66,67,68,69,95,92,93,94];
-            pos2 = [111,112,113,114,115,116,117,118,119,145,142,143,144];
-            pos3 = [161,162,163,164,165,166,167,168,169,91,141,192,194];
-
-            for(var i = 0;i<13;i++){
-                this.manageCard(0,pos0[i]);
-                this.manageCard(1,pos1[i]);
-                this.manageCard(2,pos2[i]);
-                this.manageCard(3,pos3[i]);
-            }
-            this.tab.eachPos(function (pos) {
-                var pId = this.tab.getPidWithPos(pos);
-                var cards13 = Object.keys(this.rawHandCards[pos]);
-                this.sendSpecialAndSave(pId,Message.startCards,{cardIndexs:cards13});
-                if(pos == 3)console.log(cards13);
-            }.bind(this))
-            this.touchAndDealHandAction(this.mainPos)
+            // this.washCards = [41,42,43,44,191];
+            // this.touchIndex = 0;
+            // this.mainPos = 2;
+            // pos0 = [11,12,13,14,15,16,17,18,19,45,42,43,44];
+            // pos1 = [61,62,63,64,65,66,67,68,69,95,92,93,94];
+            // pos2 = [111,112,113,114,115,116,117,118,119,145,142,143,144];
+            // pos3 = [161,162,163,164,165,166,167,168,169,91,141,192,194];
+            //
+            // for(var i = 0;i<13;i++){
+            //     this.manageCard(0,pos0[i]);
+            //     this.manageCard(1,pos1[i]);
+            //     this.manageCard(2,pos2[i]);
+            //     this.manageCard(3,pos3[i]);
+            // }
+            // this.tab.eachPos(function (pos) {
+            //     var pId = this.tab.getPidWithPos(pos);
+            //     var cards13 = Object.keys(this.rawHandCards[pos]);
+            //     this.sendSpecialAndSave(pId,Message.startCards,{cardIndexs:cards13});
+            //     if(pos == 3)console.log(cards13);
+            // }.bind(this))
+            // this.touchAndDealHandAction(this.mainPos)
         }
 
     }
