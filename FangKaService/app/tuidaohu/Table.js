@@ -79,8 +79,17 @@ class Table {
     hitPos(){
         return this.logic.toHitPos;
     }
+
     hasCard(pos,cardIndex){
         return !UnitTools.isNullOrUndefined(this.logic.rawHandCards[pos][cardIndex])
+    }
+
+    hasAction(pos,actionType){ //判断是否有动作
+        var action = this.logic.action;
+        var actions = action.getActionData();
+
+        if (UnitTools.isNullOrUndefined(actions[pos][actionType])) return false;
+        return true;
     }
 
     update() {

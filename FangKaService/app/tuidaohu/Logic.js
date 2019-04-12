@@ -275,7 +275,9 @@ class Logic{
             this.handActions[pos].push(action);//保存自己的动作
             //通知所有的玩家，有人碰了
             this.sendGroupAndSave([],Message.doAction,{pos:pos,hitPos:action.hitPos,hitIndex:cardIndex,actionType:actionType,cardIndexs:selects});
-            this.toHitCard(pos);
+            // this.toHitCard(pos);
+            var nextPos = this.tab.getNextPos(action.hitPos);
+            this.touchAndDealHandAction(nextPos);
         }else if(actionType == Logic.HandAction.AnGang){//处理暗杠
             var selectAction = null;
             for(var idx in action){

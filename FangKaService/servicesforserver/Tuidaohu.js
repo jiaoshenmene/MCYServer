@@ -153,6 +153,43 @@ module.exports = function () {
         cb({ok:true,suc:true});
     }
 
+    service.selectAction = function (data,cb) { //客户端选择操作
+
+        //判断打牌的合法性
+        var playerId = cb.session.playerId;
+        if(!User.getIsLogin(playerId)){
+            cb({ok:true,suc:false,codes:Codes.Player_Not_Login});
+            return;
+        }
+
+        var actionType = data.actionType;
+        var tIndex = data.tIndex;
+        var actionId = data.actionId;
+
+        var table = User.getPlayerGameInstance(playerId);
+
+        if(!table){
+            cb({ok:true,suc:false,codes:Codes.Player_Not_In_Game});
+            return;
+        }
+
+        if(actionId != table.actionId()){
+            cb({ok:true,suc:false,codes:Codes.Game_Action_Not_Valid});
+            return;
+        }
+
+        var pos = User.getPos(playerId);
+
+        if(!table.hasAction(pos,actionType)){
+            cb({ok:true,suc:false,codes:Codes.Game_Action_Not_Valid});
+            return;
+        }
+
+        table.logic.action.setRespond(pos,{actionType:actionType,tIndex:tIndex});
+        cb({cb:true,suc:true});
+
+    }
+
 
     return {
         service: service, onClientIn: onClientIn, onClientOut: onClientOut, onStart: onStart
